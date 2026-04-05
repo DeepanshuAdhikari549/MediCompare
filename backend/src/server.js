@@ -18,7 +18,10 @@ const app = express();
 // ✅ CORS FIX (important for Vercel frontend)
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || '*',
+    origin: function (origin, callback) {
+      const allowedOrigin = process.env.FRONTEND_URL || origin;
+      callback(null, allowedOrigin || true);
+    },
     credentials: true,
   })
 );
