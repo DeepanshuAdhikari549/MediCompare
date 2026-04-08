@@ -50,10 +50,10 @@ export default function Layout({ children, theme, setTheme }) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500 text-white text-xs font-bold shadow shadow-sky-500/30">
-              MC
+              M
             </span>
             <span className="text-xl font-bold bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text text-transparent tracking-tight">
-              MediCompare
+              Mediora
             </span>
           </Link>
 
@@ -66,7 +66,7 @@ export default function Layout({ children, theme, setTheme }) {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="X-ray, Blood test, MRI, Full body checkup..."
+                placeholder="X-ray, Blood test, MRI, medicine..."
                 className="w-full pl-11 pr-4 py-2.5 bg-transparent text-sm focus:outline-none"
               />
               <button
@@ -77,6 +77,14 @@ export default function Layout({ children, theme, setTheme }) {
               </button>
             </div>
           </form>
+
+          {/* Medicine quick link (desktop) */}
+          <Link
+            to="/medicine"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 transition-colors whitespace-nowrap"
+          >
+            💊 Medicine
+          </Link>
 
           {/* Desktop right actions */}
           <div className="hidden md:flex items-center gap-2">
@@ -240,7 +248,15 @@ export default function Layout({ children, theme, setTheme }) {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 flex-col">
+                    <Link
+                      to="/medicine"
+                      onClick={() => setMobileNavOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700/40 text-emerald-700 dark:text-emerald-300 text-sm font-medium"
+                    >
+                      💊 Medicine Search
+                    </Link>
+                    <div className="flex gap-3">
                     <Link
                       to="/login"
                       onClick={() => setMobileNavOpen(false)}
@@ -255,6 +271,7 @@ export default function Layout({ children, theme, setTheme }) {
                     >
                       Sign up
                     </Link>
+                    </div>
                   </div>
                 )}
               </div>
@@ -271,11 +288,12 @@ export default function Layout({ children, theme, setTheme }) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
             <div className="flex items-center gap-2">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-sky-500 text-white text-xs font-bold">MC</span>
-              <span className="font-semibold text-slate-700 dark:text-slate-300">MediCompare</span>
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-sky-500 text-white text-xs font-bold">M</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Mediora</span>
             </div>
             <p>Find best hospitals &amp; lab tests at lowest price near you.</p>
             <div className="flex gap-4">
+              <Link to="/medicine" className="hover:text-emerald-500 transition-colors">💊 Medicine</Link>
               <Link to="/search?city=Dehradun" className="hover:text-sky-500 transition-colors">Dehradun</Link>
               <Link to="/search?city=Delhi" className="hover:text-sky-500 transition-colors">Delhi</Link>
               <Link to="/compare" className="hover:text-sky-500 transition-colors">Compare</Link>

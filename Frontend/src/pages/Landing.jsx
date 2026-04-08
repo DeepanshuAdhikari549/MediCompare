@@ -11,6 +11,9 @@ const services = [
   'CT scan cost',
   'Full body checkup',
   'Doctor consultation fee',
+  'Medicine for fever',
+  'Medicine for cold & cough',
+  'Medicine for headache',
 ];
 
 const features = [
@@ -51,10 +54,10 @@ export default function Landing() {
             Smart recommendations powered by AI
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
-            Find best hospitals & lab tests at lowest price near you
+            Find hospitals, lab tests & medicine info<br className="hidden md:block" /> all in one place
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-            Compare prices, ratings, and book appointments in one place. 
+            Compare prices & ratings, search medicine effects, and book appointments instantly.
           </p>
         </motion.div>
 
@@ -98,25 +101,50 @@ export default function Landing() {
           </form>
         </motion.div>
 
-        {/* POPULAR SERVICES */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-24"
+          className="flex flex-wrap justify-center gap-2 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          {services.map((s, i) => (
+          {services.slice(0,6).map((s, i) => (
             <Link key={i} to={`/search?q=${encodeURIComponent(s)}`}>
               <span className="inline-block px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 hover:border-sky-500 hover:text-sky-600 dark:hover:border-sky-400 dark:hover:text-sky-400 transition-all shadow-sm">
                 {s}
               </span>
             </Link>
           ))}
+          {services.slice(6).map((s, i) => (
+            <Link key={i+6} to={`/medicine?q=${encodeURIComponent(s.replace('Medicine for ',''))}`}>
+              <span className="inline-block px-4 py-2 rounded-full border border-emerald-200 dark:border-emerald-700/60 bg-emerald-50 dark:bg-emerald-900/20 text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:border-emerald-500 hover:text-emerald-600 transition-all shadow-sm">
+                💊 {s}
+              </span>
+            </Link>
+          ))}
+        </motion.div>
+
+        {/* MEDICINE BANNER */}
+        <motion.div
+          className="w-full max-w-3xl mx-auto mb-20"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Link to="/medicine">
+            <div className="flex items-center gap-5 p-5 rounded-2xl border border-emerald-200 dark:border-emerald-700/50 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 hover:shadow-md transition-all cursor-pointer">
+              <div className="text-4xl">💊</div>
+              <div>
+                <p className="font-bold text-slate-900 dark:text-white text-lg">Medicine Search — New!</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Search any medicine to see uses, side effects, advantages, disadvantages & disease-based guidance.</p>
+              </div>
+              <span className="ml-auto text-emerald-600 dark:text-emerald-400 font-semibold text-sm whitespace-nowrap">Explore →</span>
+            </div>
+          </Link>
         </motion.div>
 
         {/* FEATURES GRID */}
         <section className="w-full mb-24">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Why MediCompare?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Why Mediora?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {features.map((f, i) => (
               <motion.div

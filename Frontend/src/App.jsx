@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import Medicine from './pages/Medicine';
 
 // Lazy-load heavy 3D Features page to prevent crashes if @react-three/fiber is absent
 const Features = lazy(() =>
@@ -52,6 +53,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/medicine" element={<Medicine />} />
           <Route path="/features" element={<Features />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
